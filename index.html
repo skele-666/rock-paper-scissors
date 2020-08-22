@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Rock Paper Scissors</title>
+    </head>
+
+    <body>
+        <script>
+            let randomNumber = Math.floor(Math.random() * 3) + 1;
+            function computerPlay() {
+                var gameArray = ["rock", "paper", "scissors"];
+                return gameArray[Math.floor(Math.random() * gameArray.length)];
+            }
+
+            function playRound(playerSelection, computerSelection) {
+                if ((playerSelection == 'rock') && (computerSelection == 'scissors')) {
+                    return "You win! Rock beats scissors! :)";
+                } else if ((playerSelection == 'paper') && (computerSelection == 'rock')) {
+                    return "You win! Paper beats rock! :)"; 
+                }  else if ((playerSelection == 'scissors') && (computerSelection == 'paper')) {
+                    return "You win! Scissors beats paper! :)"; 
+                }  else if ((playerSelection == 'scissors') && (computerSelection == 'rock')) {
+                    return "You lose. Rock beats scissors. :("; 
+                }  else if ((playerSelection == 'paper') && (computerSelection == 'scissors')) {
+                    return "You lose. Scissors beats paper. :(";
+                }  else if ((playerSelection == 'rock') && (computerSelection == 'paper')) {
+                    return "You lose. Paper beats rock. :("; 
+                }  else {
+                    return "It's a draw! :P";
+                }
+            }
+            
+            let count = 0;
+            let playerScore = 0;
+            let computerScore = 0;
+            let drawScore = 0;
+
+            function game() {
+                while (count < 5) {
+                    const computerSelection = computerPlay();
+                    const selection = prompt("Rock, paper or scissors? (Do not enter any unessecary spaces or characters)");
+                    let playerSelection = selection.toLowerCase();
+
+                    console.log(playRound(playerSelection, computerSelection));
+
+                    if (playRound(playerSelection, computerSelection).includes("lose")) {
+                        computerScore++;
+                        count++;
+                    } else if (playRound(playerSelection, computerSelection).includes("win")) {
+                        playerScore++;
+                        count++;
+                    } else if (playerSelection == computerSelection) {
+                        drawScore++;
+                        count++;
+                    } else {
+                        return "You have typed in something incorrectly. Please reload the page and try again.";
+                        // not working
+                    }
+
+                    console.log("Computer Score: " + computerScore);
+                    console.log("Player Score: " + playerScore);
+                    console.log("Draws: " + drawScore);
+                    console.log("Round: " + count);
+                }
+            }
+
+            game();
+        </script>
+    </body>
+</html>
