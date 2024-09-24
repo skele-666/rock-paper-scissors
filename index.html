@@ -52,19 +52,19 @@
 
             // Play 5 rounds
             while (roundsLeft > 0) {
-                const humanSelection = getHumanChoice(); // Get human's choice for this round
-                const computerSelection = getComputerChoice(); // Get computer's choice for this round
+                const humanSelection = getHumanChoice();
+                const computerSelection = getComputerChoice();
                 const result = playRound(humanSelection, computerSelection); // Play the round
 
                 if (result === 'human') {
-                    humanScore++; // Increment human's score if they win the round
+                    humanScore++;
                 } else if (result === 'computer') {
-                    computerScore++; // Increment computer's score if it wins the round
+                    computerScore++;
                 }
 
                 console.log(`Score - You: ${humanScore}, Computer: ${computerScore}`);
                 console.log(''); // Line break for better readability
-                roundsLeft--; // Decrement rounds left
+                roundsLeft--;
             }
 
             // Final score and result
