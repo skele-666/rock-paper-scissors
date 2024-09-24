@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Rock Paper Scissors</title>
+</head>
+
+<body>
+    <script>
+        function getComputerChoice() {
+            if ((Math.floor(Math.random() * 100)) <= 33) return 'rock';
+            else if (((Math.floor(Math.random() * 100))) <= 66) return 'paper';
+            else return 'scissors';
+        }
+
+        function getHumanChoice() {
+            let userInput = prompt('Rock, Paper or Scissors?').toLowerCase();
+            if (userInput === 'rock' || userInput === 'paper' || userInput === 'scissors') {
+                return userInput;
+            } else {
+                console.log('Invalid input. Please try again.');
+                return getHumanChoice(); // Recursive call for invalid input
+            }
+        }
+
+        let roundsLeft = 5;
+
+        function playGame() {
+            let humanScore = 0;
+            let computerScore = 0;
+
+            function playRound(humanChoice, computerChoice) {
+                console.log(`You have chosen ${humanChoice}.`);
+                console.log(`Computer has chosen ${computerChoice}.`);
+
+                if (humanChoice === computerChoice) {
+                    console.log(`It\'s a draw! Both chose ${computerChoice}.`);
+                } else if ( // All winning conditions for the player:
+                    (humanChoice === 'rock' && computerChoice === 'scissors') ||
+                    (humanChoice === 'paper' && computerChoice === 'rock') ||
+                    (humanChoice === 'scissors' && computerChoice === 'paper')
+                ) {
+                    console.log('You win!');
+                    humanScore++;
+                } else {
+                    console.log('Computer wins!');
+                    computerScore++;
+                }
+            }
+
+            // Play 5 rounds
+            while (roundsLeft > 0) {
+                const humanSelection = getHumanChoice(); // Get human's choice for this round
+                const computerSelection = getComputerChoice(); // Get computer's choice for this round
+                const result = playRound(humanSelection, computerSelection); // Play the round
+
+                if (result === 'human') {
+                    humanScore++; // Increment human's score if they win the round
+                } else if (result === 'computer') {
+                    computerScore++; // Increment computer's score if it wins the round
+                }
+
+                console.log(`Score - You: ${humanScore}, Computer: ${computerScore}`);
+                console.log(''); // Line break for better readability
+                roundsLeft--; // Decrement rounds left
+            }
+
+            // Final score and result
+            if (roundsLeft == 0) {
+                if (humanScore > computerScore) {
+                    console.log('Congratulations, you won the game!');
+                } else if (humanScore < computerScore) {
+                    console.log('Computer won the game. Better luck next time!');
+                } else {
+                    console.log('The game ended in a draw!');
+                }
+            }
+        }
+
+        playGame();
+    </script>
+</body>
+
+</html>
