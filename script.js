@@ -2,6 +2,8 @@
 const rock = document.getElementById('rock');
 const paper = document.getElementById('paper');
 const scissors = document.getElementById('scissors');
+const results = document.getElementById('results');
+const result = document.createElement('p');
 
 function getComputerChoice() {
     if ((Math.floor(Math.random() * 100)) <= 33) return 'rock';
@@ -9,22 +11,31 @@ function getComputerChoice() {
     else return 'scissors';
 }
 
-function playRound(humanChoice, computerChoice) {
-    console.log(`You have chosen ${humanChoice}.`);
-    console.log(`Computer has chosen ${computerChoice}.`);
+let humanScore = 0;
+let computerScore = 0;
 
+function playRound(humanChoice, computerChoice) {
     if (humanChoice === computerChoice) {
-        console.log(`It\'s a draw! Both chose ${computerChoice}.`);
+        result.textContent = `It's a tie! Both chose ${computerChoice}.
+        Your score: ${humanScore}
+        Computer score: ${computerScore}`;
+        results.appendChild(result);
     } else if ( // All winning conditions for the player:
         (humanChoice === 'rock' && computerChoice === 'scissors') ||
         (humanChoice === 'paper' && computerChoice === 'rock') ||
         (humanChoice === 'scissors' && computerChoice === 'paper')
     ) {
-        console.log('You win!');
-        // humanScore++;
+        humanScore++;
+        result.textContent = `You Win!
+        Your score: ${humanScore}
+        Computer score: ${computerScore}`;
+        results.appendChild(result);
     } else {
-        console.log('Computer wins!');
-        // computerScore++;
+        computerScore++;
+        result.textContent = `Computer Wins!
+        Your score: ${humanScore}
+        Computer score: ${computerScore}`;
+        results.appendChild(result);
     }
 
     getComputerChoice();
